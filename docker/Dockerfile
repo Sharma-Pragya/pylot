@@ -45,7 +45,9 @@ ENV PATH="/home/erdos/.cargo/bin:${PATH}"
 RUN echo "export PATH=/home/erdos/.cargo/bin:${PATH}" >> ~/.bashrc
 RUN rustup default nightly
 RUN mkdir -p /home/erdos/workspace
-RUN cd /home/erdos/workspace && git clone https://github.com/erdos-project/erdos.git && cd erdos && python3 python/setup.py install
+# Maturin builder - RUN cd /home/erdos/workspace && git clone https://github.com/erdos-project/erdos.git && cd erdos && pip3 install maturin && maturin develop
+RUN cd /home/erdos/workspace && git clone https://github.com/erdos-project/erdos.git && cd erdos && cargo build
+# Outdated python builder - RUN cd /home/erdos/workspace && git clone https://github.com/erdos-project/erdos.git && cd erdos && python3 python/setup.py install
 
 # Set up Pylot.
 RUN sudo apt-get install -y libcudnn8 cuda-toolkit-11-4 ssh libqt5core5a libeigen3-dev cmake qtbase5-dev libpng16-16 libtiff5 python3-tk python3-pygame libgeos-dev
